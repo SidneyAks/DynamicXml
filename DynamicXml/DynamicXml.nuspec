@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>DynamicXml</id>
+    <version>1.0.0</version>
+    <title>$title$</title>
+    <authors>Sidney Akers</authors>
+    <repository type="git" url="https://github.com/SidneyAks/Comparish" />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>A utility for parsing XML into indexable objects</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>XML</tags>
+  </metadata>
+</package>
