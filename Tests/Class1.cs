@@ -17,13 +17,13 @@ namespace Tests
         [TestMethod]
         public void TestParserParsesWithoutError()
         {
-            var xml = DynamicXml.Parse(flowerText);
+            var xml = IndeXml.Parse(flowerText);
         }
 
         [TestMethod]
         public void TestObjectCanBeEnumerated()
         {
-            var xml = DynamicXml.Parse(flowerText);
+            var xml = IndeXml.Parse(flowerText);
 
             Assert.IsTrue(xml.Any(x => x["COMMON"].ToString() == "Mayapple" && x["BOTANICAL"].ToString() == "Podophyllum peltatum"));
         }
@@ -41,7 +41,7 @@ namespace Tests
         [TestMethod]
         public void TestObjectCanBeDeserialized()
         {
-            var xml = DynamicXml.Parse(flowerText);
+            var xml = IndeXml.Parse(flowerText);
             var list = xml.Select(x => x.Deserialize<Flower>());
 
             Assert.IsTrue(list.Any(x => x.COMMON == "Mayapple" && x.BOTANICAL == "Podophyllum peltatum"));

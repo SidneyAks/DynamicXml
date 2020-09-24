@@ -11,25 +11,25 @@ using System.Xml.Serialization;
 
 namespace DXML
 {
-    public class DynamicXml : IEnumerable<DynamicXml>
+    public class IndeXml : IEnumerable<IndeXml>
     {
-        public static DynamicXml Parse(string xmlString)
+        public static IndeXml Parse(string xmlString)
         {
-            return new DynamicXml(XDocument.Parse(xmlString).Root);
+            return new IndeXml(XDocument.Parse(xmlString).Root);
         }
 
         #region Private Constructors
-        private DynamicXml(XElement root)
+        private IndeXml(XElement root)
         {
             _root = root;
         }
 
-        private DynamicXml(string str)
+        private IndeXml(string str)
         {
             _root = new XElement("value", str);
         }
 
-        private DynamicXml(IEnumerable<DynamicXml> objs)
+        private IndeXml(IEnumerable<IndeXml> objs)
         {
             _root = Parse($"<Array>{String.Join("", objs.Select(x => x.Text))}</Array>")._root;
         }
@@ -53,27 +53,27 @@ namespace DXML
         IEnumerable<XAttribute> NSDeclarations => _root.Attributes().Where(a => a.IsNamespaceDeclaration);
         String NSLabel => _root.GetPrefixOfNamespace(_root.Name.Namespace);
 
-        private bool TryGetMember(string Name, out DynamicXml result)
+        private bool TryGetMember(string Name, out IndeXml result)
         {
             result = null;
 
             var att = _root.Attribute(Name);
             if (att != null)
             {
-                result = new DynamicXml(att.Value);
+                result = new IndeXml(att.Value);
                 return true;
             }
 
             var nodes = _root.Elements().Where(x => x.Name.LocalName == Name);
             if (nodes.Count() > 1)
             {
-                result = new DynamicXml(nodes.Select(n => n.HasElements ? new DynamicXml(n) : new DynamicXml(n.Value)));
+                result = new IndeXml(nodes.Select(n => n.HasElements ? new IndeXml(n) : new IndeXml(n.Value)));
                 return true;
             }
             if (nodes.Count() == 1)
             {
                 var node = nodes.First();
-                result = node.HasElements || node.HasAttributes ? new DynamicXml(node) : new DynamicXml(node.Value);
+                result = node.HasElements || node.HasAttributes ? new IndeXml(node) : new IndeXml(node.Value);
                 return true;
             }
 
@@ -83,11 +83,11 @@ namespace DXML
         #region Equality Test Overrides
         public override bool Equals(object obj)
         {
-            return obj.GetType() == typeof(DynamicXml) ? this._root.Equals(((dynamic)obj)._root) :
+            return obj.GetType() == typeof(IndeXml) ? this._root.Equals(((dynamic)obj)._root) :
                 obj.GetType() == typeof(String) ? this.Text == (string)obj :
                 false;
         }
-        public static bool operator ==(DynamicXml a, object obj)
+        public static bool operator ==(IndeXml a, object obj)
         {
             if (Object.ReferenceEquals(a, null) && Object.ReferenceEquals(obj, null))
             {
@@ -97,11 +97,11 @@ namespace DXML
             {
                 return false;
             }
-            return obj.GetType() == typeof(DynamicXml) ? a._root == ((dynamic)obj)._root :
+            return obj.GetType() == typeof(IndeXml) ? a._root == ((dynamic)obj)._root :
                 obj.GetType() == typeof(String) ? a.Text == (string)obj :
             false;
         }
-        public static bool operator !=(DynamicXml a, object obj)
+        public static bool operator !=(IndeXml a, object obj)
         {
             return !(a == obj);
         }
@@ -112,11 +112,11 @@ namespace DXML
         #endregion Equality Test Overrides
 
         #region Indexing And Enumeration
-        public DynamicXml this[string key]
+        public IndeXml this[string key]
         {
             get
             {
-                DynamicXml result;
+                IndeXml result;
                 if (TryGetMember(key, out result))
                 {
                     return result;
@@ -124,13 +124,13 @@ namespace DXML
                 return null;
             }
         }
-        public IEnumerator<DynamicXml> GetEnumerator()
+        public IEnumerator<IndeXml> GetEnumerator()
         {
-            return _root.Elements().Select(x => new DynamicXml(x)).GetEnumerator();
+            return _root.Elements().Select(x => new IndeXml(x)).GetEnumerator();
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _root.Elements().Select(x => new DynamicXml(x)).GetEnumerator();
+            return _root.Elements().Select(x => new IndeXml(x)).GetEnumerator();
         }
         #endregion
     }
@@ -140,7 +140,7 @@ namespace DXML.Serialization
 {
     public static class Serializer 
     {
-        public static T Deserialize<T>(this DynamicXml dXml)
+        public static T Deserialize<T>(this IndeXml dXml)
         {
             var attrs = new XmlAttributes();
 

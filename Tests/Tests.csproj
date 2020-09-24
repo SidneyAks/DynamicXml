@@ -46,9 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DynamicXml\DynamicXml.csproj">
+    <ProjectReference Include="..\IndeXml\IndeXml.csproj">
       <Project>{8692b6ab-9d42-4813-8ece-2b215746140f}</Project>
-      <Name>DynamicXml</Name>
+      <Name>IndeXml</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

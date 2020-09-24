@@ -7,8 +7,8 @@
     <ProjectGuid>{8692B6AB-9D42-4813-8ECE-2B215746140F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DynamicXml</RootNamespace>
-    <AssemblyName>DynamicXml</AssemblyName>
+    <RootNamespace>IndeXml</RootNamespace>
+    <AssemblyName>IndeXml</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DynamicXml.cs" />
+    <Compile Include="IndeXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DynamicXml.nuspec" />
+    <None Include="IndeXml.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
